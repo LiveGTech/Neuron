@@ -1,0 +1,13 @@
+{
+    "name": "neuron",
+    "version": "0.1.0",
+    "description": "Backend system for storing documents and data under LiveG Accounts.",
+    "main": "src/main.js",
+    "author": "LiveG Technologies",
+    "bin": {
+        "neuron": "src/main.js"
+    },
+    "dependencies": {
+        "peerjs": "^1.3.2"
+    }
+}
