@@ -17,8 +17,8 @@ The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL NOT', 'SHOULD', 'S
         {"url": "turn:username@turn1.example.com:443", "secret": "secretSuchAsPassword"},
     ],
     "nodes": [
-        {"id": "neuron_liveg_eu-west1", "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxDn5MDN2tpkWKac8ICXjb8I7zljdYjYjFrxQ9IOGLNTfeqsRNuz+ZSVwBgES1fyYBzrx1fsV4JvzohdqKhoh+pwREl3eR7Ug+IDhvXtbeGSd8BF+GmJ0aLJN/MQMy+bppGmxRgHnbUwBrCdJlJAN59VEEfWRCmg4cqFBQo6/tiVBGQ3u6HlghypDs/yJ/WsiafWDiUGnwIkei0kme9ivrtkV1EicpxMCCZbU1UIoqNwvyMhYYQDRmGLC3Tz/njm+QT2DN4XZcq1lkltk8RrXnyXZzwJ2j9M+dI0xqNQSP67HVZGIT9NEV4ef7cVk0N5uw87b7Hr/8MqZNTd9MDvpgQIDAQAB"},
-        {"id": "neuron_liveg_eu-west2", "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAszdDKgkdljFriM+xz9RfQb2JJ/xco8XNEtg0gDn8wSA4JMjqUa2aSSRwjJzIYqCbkApFQ0mrYcf6cvVINaHsnjy7JAtTecIAAyY5NfsR4SVqW/9fzm7dGTxH4EK5R4g0SFQBrCP8EwJxBCRofvOAGTOYfhl6PkB88kK0M7DwObrH54gOsMMhp7gd6oarfRcH4ZPzaPcQfAklsLO/oltfUeODDI386k4GYz4o+cBljgZ1uoFqBRGbpj5NXN3dkE3WvaWQ94lVFcmPd8NF4BgLwLz43bXDEWclaoOUcHJrUC9LosASYV9hTZtRD7LqKeHs4bM1VqI+N/SPwhOnitX+jQIDAQAB"}
+        {"id": "neuron_liveg_eu-west1_IuDrfE29DnlB2KU7", "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxDn5MDN2tpkWKac8ICXjb8I7zljdYjYjFrxQ9IOGLNTfeqsRNuz+ZSVwBgES1fyYBzrx1fsV4JvzohdqKhoh+pwREl3eR7Ug+IDhvXtbeGSd8BF+GmJ0aLJN/MQMy+bppGmxRgHnbUwBrCdJlJAN59VEEfWRCmg4cqFBQo6/tiVBGQ3u6HlghypDs/yJ/WsiafWDiUGnwIkei0kme9ivrtkV1EicpxMCCZbU1UIoqNwvyMhYYQDRmGLC3Tz/njm+QT2DN4XZcq1lkltk8RrXnyXZzwJ2j9M+dI0xqNQSP67HVZGIT9NEV4ef7cVk0N5uw87b7Hr/8MqZNTd9MDvpgQIDAQAB"},
+        {"id": "neuron_liveg_eu-west2_8uUAOTuurxrQgQG_", "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAszdDKgkdljFriM+xz9RfQb2JJ/xco8XNEtg0gDn8wSA4JMjqUa2aSSRwjJzIYqCbkApFQ0mrYcf6cvVINaHsnjy7JAtTecIAAyY5NfsR4SVqW/9fzm7dGTxH4EK5R4g0SFQBrCP8EwJxBCRofvOAGTOYfhl6PkB88kK0M7DwObrH54gOsMMhp7gd6oarfRcH4ZPzaPcQfAklsLO/oltfUeODDI386k4GYz4o+cBljgZ1uoFqBRGbpj5NXN3dkE3WvaWQ94lVFcmPd8NF4BgLwLz43bXDEWclaoOUcHJrUC9LosASYV9hTZtRD7LqKeHs4bM1VqI+N/SPwhOnitX+jQIDAQAB"}
     ]
 }
 ```
