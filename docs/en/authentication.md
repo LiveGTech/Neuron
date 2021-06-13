@@ -149,7 +149,7 @@ The `type` and `in` properties are the same format as the handshake process. The
 }
 ```
 
-**3b.3.** The sending node MUST then prove its trust, too, when sending over the main data:
+**3b.3.** The sending node MUST verify this signature. The sending node MUST then prove its trust, too, when sending over the main data:
 
 ```json
 {
@@ -162,7 +162,7 @@ The `type` and `in` properties are the same format as the handshake process. The
 }
 ```
 
-**3b.4.** The receiving node MUST then use the node discovery file to determine whether the sending node is genuine, by using the sending node's unique identifier and public key (as listed on the node discovery file) to verify the signature. Once verified, the receiving node can then return any data:
+**3b.4.** The receiving node MUST then use the node discovery file to determine whether the sending node is genuine, by using the sending node's unique identifier and public key (as listed on the node discovery file) to verify the signature of the `in` value. Once verified, the receiving node can then return any data:
 
 ```json
 {

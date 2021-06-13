@@ -9,8 +9,10 @@
 
 const PeerJsPeer = require("peerjs");
 
+var common = require("./common");
 var config = require("./config");
 var requests = require("./requests");
+var crypto = require("./crypto");
 
 exports.host = "0.peerjs.com";
 exports.port = 443;
@@ -50,7 +52,6 @@ exports.Node = class {
         this.connected = false;
         this.receiveQueue = {};
         this.listeningReceivers = {};
-        this.verified = false;
     }
 
     connect() {
@@ -64,18 +65,18 @@ exports.Node = class {
                     return; // Ignore this
                 }
 
-                if (data.out == undefined) {
+                if (data.in == undefined) {
                     return; // Again, ignore this
                 }
 
-                if (this.receiveQueue.hasOwnProperty(data.out)) {
+                if (this.receiveQueue.hasOwnProperty(data.in)) {
                     return; // Could be a duplicate of an already-received message, or a malformed message
                 }
 
-                this.receiveQueue[data.out] = data;
+                this.receiveQueue[data.in] = data;
 
-                if (this.listeningReceivers.hasOwnProperty(data.out)) {
-                    this.listeningReceivers[data.out](data);
+                if (this.listeningReceivers.hasOwnProperty(data.in)) {
+                    this.listeningReceivers[data.in](data);
                 }
             });
 
@@ -93,10 +94,54 @@ exports.Node = class {
         }
     }
 
-    verify() {
-        this.ensureConnection();
+    sendAndReceive(data) {
+        return new Promise(function(resolve, reject) {
+            this.ensureConnection();
 
-        // TODO: Perform verification process
+            data.out = common.generateKey(16, common.HEX_DIGITS);
+            this.listeningReceivers[data.out] = function(rxData) {
+                resolve(rxData);
+            };
+
+            this.connection.send(data);
+
+            return data;
+        });
+    }
+
+    request(data) {
+        var thisScope = this;
+
+        return this.sendAndReceive({
+            type: "open",
+            self: "node"
+        }).then(function(rxData) {
+            if (typeof(rxData.in) != "string" || typeof(rxData.out) != "string" || typeof(rxData.signature) != "string") {
+                return Promise.reject(`Node with ID \`${thisScope.id}\` sent a malformed message`);
+            }
+
+            if (!crypto.verifySignature(rxData.in, rxData.signature, thisScope.publicKey)) {
+                return Promise.reject(`The authenticity of node with ID \`${thisScope.id}\` could not be verified`);
+            }
+
+            return this.sendAndReceive({
+                type: "request",
+                in: rxData.out,
+                self: "node",
+                data,
+                signature: crypto.sign(rxData.out)
+            });
+        }).then(function(rxData) {
+            if (typeof(rxData.in) != "string") {
+                return Promise.reject(`Node with ID \`${thisScope.id}\` sent a malformed message`);
+            }
+
+            if (!crypto.verifySignature(rxData.in, rxData.signature, thisScope.publicKey)) {
+                return Promise.reject(`The authenticity of node with ID \`${thisScope.id}\` could not be verified`);
+            }
+
+            return Promise.resolve(rxData.data);
+        });
     }
 };
 
