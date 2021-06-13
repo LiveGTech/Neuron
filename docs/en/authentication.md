@@ -179,7 +179,7 @@ Below is a diagram representing the communications flow between a client-to-node
 ![Diagram representing the handshake, auth and sending process within a C2N connection, and the sending process within an N2N connection](media/authdiagram.svg)
 
 ## Third-party applications access
-Since third-party applications may require the access of data held within Neuron, a method for communicating between that third-party application and the Neuron system itself must be devised. To achieve this, LiveG will implement an iframe-based library which third-party applications can then embed and communicate with for managing data held under a user's account.
+Since third-party applications may require the access of data held within Neuron, a method for communicating between a third-party application and the Neuron system itself must be devised. To achieve this, LiveG will implement an iframe-based library which third-party applications can then embed and communicate with for managing data held under a user's account.
 
 This system provides multiple advantages:
 

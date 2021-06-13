@@ -140,9 +140,39 @@ exports.Node = class {
                 return Promise.reject(`The authenticity of node with ID \`${thisScope.id}\` could not be verified`);
             }
 
-            return Promise.resolve(rxData.data);
+            return Promise.resolve(rxData);
         });
     }
+};
+
+exports.handleRequest = function(request) {
+    return null;
+};
+
+exports.handleMessage = function(id, data) {
+    if (data.type == "open") {
+        return Promise.resolve({
+            type: "response",
+            in: data.out,
+            out: common.generateKey(16, common.HEX_DIGITS),
+            signature: crypto.sign(data.out)
+        });
+    }
+
+    if (data.type == "request" && data.self == "node") {
+        for (var i = 0; i < exports.nodes.length; i++) {
+            if (exports.nodes[i].id == id && crypto.verifySignature(data.in, data.signature, exports.nodes[i].publicKey)) {
+                return Promise.resolve({
+                    type: "response",
+                    in: data.out,
+                    data: exports.handleRequest(data),
+                    signature: crypto.sign(data.out)
+                });
+            }
+        }
+    }
+
+    return Promise.resolve(null);
 };
 
 exports.discoverNodes = function(discoveryUrl = config.data.discoveryUrl || "https://liveg.tech/nodes.json") {
@@ -186,6 +216,27 @@ exports.connect = function() {
     
         exports.myPeer.on("open", function() {
             resolve();
+        });
+
+        exports.myPeer.on("connection", function(connection) {
+            connection.on("data", function(data) {
+                if (typeof(data) != "object") {
+                    return; // Ignore this
+                }
+
+                if (typeof(data.out) != "string") {
+                    return; // Again, ignore this
+                }
+
+                exports.handleMessage(connection.id, data).then(function(txData) {
+                    if (txData != null) {
+                        connection.send({
+                            ...txData,
+                            in: data.out
+                        });
+                    }
+                });
+            });
         });
     });
 };
