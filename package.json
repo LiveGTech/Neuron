@@ -10,6 +10,6 @@
     "dependencies": {
         "fs-extra": "^10.0.1",
         "mkdirp": "^1.0.4",
-        "peerjs": "^1.3.2"
+        "peerjs": "^1.4.0"
     }
 }
